@@ -10,7 +10,7 @@ public class enemy_main : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Debug.Log(enemy_move_direction);
+        
     }
 
     // Update is called once per frame
