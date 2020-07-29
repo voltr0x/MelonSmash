@@ -145,6 +145,7 @@ MonoBehaviour:
   moveDistance: 0
   moveCheck: 0
   currentDistance: 0
+  maxVariance: 0.07
   moveSpeed: 2
 --- !u!114 &-4761661159467013947
 MonoBehaviour:

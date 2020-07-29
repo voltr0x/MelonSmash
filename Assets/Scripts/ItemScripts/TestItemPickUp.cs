@@ -20,10 +20,11 @@ public class TestItemPickUp : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (playerLocation.childCount < maxChildCount)
+        if (playerLocation.childCount < maxChildCount && this.tag == "Item")
         {
             transform.SetParent(playerLocation);
             transform.position = playerLocation.position + new Vector3(0.3f, 0.6f, 0);
+            this.tag = "Item_pickedup";
         }
     }
 }

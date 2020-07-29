@@ -10,6 +10,7 @@ public class TestItemThrow : MonoBehaviour
     [HideInInspector] public float moveDistance;
     [HideInInspector] public bool moveCheck = false;
     [HideInInspector] public float currentDistance;
+    public float maxVariance = 0.7f;
     public float moveSpeed;
     void Update()
     {
@@ -18,21 +19,15 @@ public class TestItemThrow : MonoBehaviour
         {
             Throw();
         }
-        if (currentDistance > 0.05 && moveCheck == true)//if (newLocation.x > this.transform.position.x || newLocation.y > this.transform.position.y || newLocation.z > this.transform.position.z && moveCheck)
-        {
+        if (currentDistance >= maxVariance)
+        { 
             this.transform.position += movementDirection * moveDistance * Time.deltaTime * moveSpeed;
             currentDistance = Vector3.Distance(newLocation, this.transform.position);
         }
-        /*else if (currentDistance == 0)
-        {
-            moveCheck = false;
-            moveDistance = 0;
-            moveSpeed = 0;
-        }*/
     }
     void Throw()
     {
-        if (playerLocation.childCount == 1)
+        if (playerLocation.childCount == 1 && playerLocation.GetChild(0) == this.transform && this.tag == "Item_pickedup")
         {
             {
                 this.transform.SetParent(null);
@@ -42,7 +37,7 @@ public class TestItemThrow : MonoBehaviour
                 movementDirection = Vector3.Normalize(newLocation - this.transform.position);
                 moveDistance = Vector3.Distance(newLocation, this.transform.position);
                 currentDistance = Vector3.Distance(newLocation, this.transform.position);
-                moveCheck = true;
+                this.tag = "Itemthrown";
             }
         }
     }
