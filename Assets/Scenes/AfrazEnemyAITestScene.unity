@@ -264,7 +264,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 511654317}
     m_Modifications:
     - target: {fileID: 8076965229538223758, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
@@ -274,12 +274,12 @@ PrefabInstance:
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.01
+      value: -0.02
       objectReference: {fileID: 0}
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.17
+      value: -7.21
       objectReference: {fileID: 0}
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
@@ -309,7 +309,11 @@ PrefabInstance:
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
       propertyPath: m_RootOrder
+<<<<<<< HEAD:Assets/Scenes/EnemyAITestScene.unity
+      value: 0
+=======
       value: 5
+>>>>>>> 1dfc68819025ae6914778420445e630fa8261a75:Assets/Scenes/AfrazEnemyAITestScene.unity
       objectReference: {fileID: 0}
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
@@ -348,12 +352,12 @@ PrefabInstance:
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.02
+      value: 2.54
       objectReference: {fileID: 0}
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.39
+      value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
         type: 3}
@@ -402,6 +406,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8848d1648bddf4148bbb028cd12f3242, type: 3}
+--- !u!4 &511654317 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8076965229538223760, guid: 8848d1648bddf4148bbb028cd12f3242,
+    type: 3}
+  m_PrefabInstance: {fileID: 511654316}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &776156863 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8076965229538223759, guid: 8848d1648bddf4148bbb028cd12f3242,
@@ -630,12 +640,12 @@ PrefabInstance:
     - target: {fileID: 3851257638844092835, guid: 9c4f7e6106dfc774185e0c8e5565ba01,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.13
+      value: -14.31
       objectReference: {fileID: 0}
     - target: {fileID: 3851257638844092835, guid: 9c4f7e6106dfc774185e0c8e5565ba01,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.37
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 3851257638844092835, guid: 9c4f7e6106dfc774185e0c8e5565ba01,
         type: 3}

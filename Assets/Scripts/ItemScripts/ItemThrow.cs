@@ -9,6 +9,7 @@ public class ItemThrow : MonoBehaviour
     public float itemAliveTime = 0;
     GameObject currentItem;
     int countItemThrown;
+    public int damage = 4;
     // Update is called once per frame
     void Update()
     {
@@ -32,16 +33,28 @@ public class ItemThrow : MonoBehaviour
     }
     void Throw()
     {
-            if (itemsPickedup >= 1)
-            {
-                {
-                    this.transform.SetParent(null);
-                    var screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-                    screenPoint.z = 10.0f;
-                    transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
-                    this.tag = null;
-                }
-            }
+        if (itemsPickedup >= 1)
+        {
+            this.transform.SetParent(null);
+            var screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            screenPoint.z = 10.0f;
+            transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+            this.tag = null;
+        }
+    }
+    /*
+        // deal damage
+        ExplosionDamage(this.transform.position, 5.0f);
+        Destroy(this.gameObject);
+    */
+    void ExplosionDamage(Vector3 center, float radius) {
+        Debug.Log("exploded");
+        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+        int i = 0;
+        while (i < hitColliders.Length) {
+            hitColliders[i].SendMessage("take_damage", damage);
+            i++;
+        }
     }
 }
 /*public class ItemThrow : MonoBehaviour
