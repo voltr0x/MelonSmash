@@ -26,8 +26,6 @@ public class ItemThrow : MonoBehaviour
             itemAliveTime += Time.deltaTime;
             if (itemAliveTime >= itemDeleteTime)
             {
-                // deal damage
-                ExplosionDamage(this.transform.position, 5.0f);
                 Destroy(currentItem);
                 itemAliveTime = 0;
             }
@@ -35,18 +33,20 @@ public class ItemThrow : MonoBehaviour
     }
     void Throw()
     {
-            if (itemsPickedup >= 1)
-            {
-                {
-                    this.transform.SetParent(null);
-                    var screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-                    screenPoint.z = 10.0f;
-                    transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
-                    this.tag = null;
-                }
-            }
+        if (itemsPickedup >= 1)
+        {
+            this.transform.SetParent(null);
+            var screenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+            screenPoint.z = 10.0f;
+            transform.position = Camera.main.ScreenToWorldPoint(screenPoint);
+            this.tag = null;
+        }
     }
-
+    /*
+        // deal damage
+        ExplosionDamage(this.transform.position, 5.0f);
+        Destroy(this.gameObject);
+    */
     void ExplosionDamage(Vector3 center, float radius) {
         Debug.Log("exploded");
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
