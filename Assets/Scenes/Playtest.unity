@@ -3144,8 +3144,8 @@ MonoBehaviour:
     type: 3}
   initialMoveTarget: {fileID: 1269862205}
   melon: {fileID: 0}
-  minSpawnInterval: 7
-  maxSpawnInterval: 10
+  minSpawnInterval: 3
+  maxSpawnInterval: 6
 --- !u!4 &2116214656
 Transform:
   m_ObjectHideFlags: 0
