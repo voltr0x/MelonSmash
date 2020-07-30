@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3851257638844092835}
   - component: {fileID: 4910606263440624578}
-  - component: {fileID: -8359649852847832208}
+  - component: {fileID: 2592378044177594235}
   m_Layer: 0
-  m_Name: enemy
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 976c4ee8904047540b78518874dee1dc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-8359649852847832208
+--- !u!114 &2592378044177594235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,9 +91,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8172631508840389468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3894d8bc75bef841b89f01455c1246d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ef0000274968704e8bfb185e204f4c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_speed: 0
-  where_to_go: {fileID: 8076965229538223759, guid: 8848d1648bddf4148bbb028cd12f3242,
-    type: 3}
+  wayPoints:
+  - {fileID: 2923968688817638643, guid: 20b4162ea1fcabc498fe7484d053d2e7, type: 3}
+  - {fileID: 2166115314784273112, guid: 6933d4cefc6dc724d92688fbb02d3482, type: 3}
+  - {fileID: 4638067106457767824, guid: 95f97dd70ca0f7e48bbb753b8f800482, type: 3}
+  - {fileID: 2377343225023075734, guid: 4350d2d496f4624489d36153b7dc660a, type: 3}
+  speed: 3
