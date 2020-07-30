@@ -9,6 +9,7 @@ public class ItemThrow : MonoBehaviour
     public float itemAliveTime = 0;
     GameObject currentItem;
     int countItemThrown;
+    public int damage = 4;
     // Update is called once per frame
     void Update()
     {
@@ -25,6 +26,8 @@ public class ItemThrow : MonoBehaviour
             itemAliveTime += Time.deltaTime;
             if (itemAliveTime >= itemDeleteTime)
             {
+                // deal damage
+                ExplosionDamage(this.transform.position, 5.0f);
                 Destroy(currentItem);
                 itemAliveTime = 0;
             }
@@ -42,6 +45,16 @@ public class ItemThrow : MonoBehaviour
                     this.tag = null;
                 }
             }
+    }
+
+    void ExplosionDamage(Vector3 center, float radius) {
+        Debug.Log("exploded");
+        Collider[] hitColliders = Physics.OverlapSphere(center, radius);
+        int i = 0;
+        while (i < hitColliders.Length) {
+            hitColliders[i].SendMessage("take_damage", damage);
+            i++;
+        }
     }
 }
 /*public class ItemThrow : MonoBehaviour

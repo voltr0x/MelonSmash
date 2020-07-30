@@ -10,7 +10,7 @@ public class enemy_target : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    	Debug.Log("1 " + this + ": " + this.transform.position);
+    	
     }
 
     // Update is called once per frame
@@ -20,8 +20,9 @@ public class enemy_target : MonoBehaviour
     }
     // ask a node for new target
     public enemy_target update_target( enemy_main curr_enemy ) {
+        // determine distance between an enemy and the target
     	float distance = Vector3.Distance(curr_enemy.transform.position, this.transform.position);
-    	//Debug.Log(distance);
+    	// If the enemy has arrived, guide to the next target
     	if(distance > arrival_radius || !next_target)
     	{
     		return this;
