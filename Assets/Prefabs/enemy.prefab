@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3894d8bc75bef841b89f01455c1246d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy_speed: 1
+  enemy_speed: 3
   where_to_go: {fileID: 0}
   health: 10
   scriptAObject: {fileID: 0}
