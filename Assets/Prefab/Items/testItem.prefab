@@ -11,15 +11,8 @@ GameObject:
   - component: {fileID: 8823819440073275645}
   - component: {fileID: 6494153569718642641}
   - component: {fileID: 5249775197030568691}
-<<<<<<< HEAD
-  - component: {fileID: -7808971738787255737}
-  - component: {fileID: 8794564309173532450}
-  - component: {fileID: 1660613985388620455}
-  - component: {fileID: 2531441592572423882}
-=======
   - component: {fileID: -7778313794828200700}
   - component: {fileID: 5656264505057183455}
->>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
   m_Layer: 0
   m_Name: testItem
   m_TagString: Item
@@ -107,11 +100,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
-<<<<<<< HEAD
---- !u!114 &-7808971738787255737
-=======
 --- !u!114 &-7778313794828200700
->>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -120,44 +109,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5234487631351663235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
-  m_Script: {fileID: 11500000, guid: fa4b13ebd1a65bd46bfd130f90a38a5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemDeleteTime: 10
-  itemAliveTime: 0
-  damage: 4
---- !u!114 &8794564309173532450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5234487631351663235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 154bba517d3f9014aa3b6e9adf876a6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1660613985388620455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5234487631351663235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7806c9cf177852c4dada40c6385ad3e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2531441592572423882
-=======
   m_Script: {fileID: 11500000, guid: 7806c9cf177852c4dada40c6385ad3e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &5656264505057183455
->>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,13 +129,8 @@ MonoBehaviour:
   moveDistance: 0
   moveCheck: 0
   currentDistance: 0
-<<<<<<< HEAD
-  maxVariance: 0.7
-  moveSpeed: 0
-=======
   maxVariance: 0.07
   moveSpeed: 2
   damage: 4
   itemAliveTime: 0
   itemDeleteTime: 10
->>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
