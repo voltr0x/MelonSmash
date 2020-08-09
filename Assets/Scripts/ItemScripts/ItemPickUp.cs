@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestItemPickUp : MonoBehaviour
+public class ItemPickUp : MonoBehaviour
 {
     Transform playerLocation;
     int maxChildCount = 1;

@@ -19,7 +19,8 @@ public class enemy_target : MonoBehaviour
         
     }
     // ask a node for new target
-    public enemy_target update_target( enemy_main curr_enemy ) {
+    public enemy_target update_target( enemy_main curr_enemy )
+    {
         // determine distance between an enemy and the target
     	float distance = Vector3.Distance(curr_enemy.transform.position, this.transform.position);
     	// If the enemy has arrived, guide to the next target
