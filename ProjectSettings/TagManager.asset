@@ -8,6 +8,7 @@ TagManager:
   - Item_pickedup
   - Itemthrown
   - objectDestroyer
+  - Enemy
   layers:
   - Default
   - TransparentFX
