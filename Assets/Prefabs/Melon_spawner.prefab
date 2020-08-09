@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90168d8f0c60c264ebf13ef729c89b38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  melon: {fileID: 5234487631351663235, guid: bfeea7f2046372c418cf696c1086a393, type: 3}
+  melon: {fileID: 4114523553197787413, guid: 3eb418f27180ea84fa01c41caa825121, type: 3}
   minSpawnInterval: 3
   maxSpawnInterval: 6
   spawnTime: 0
