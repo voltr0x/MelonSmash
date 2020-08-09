@@ -8,34 +8,47 @@ public class ItemThrowVersion2 : MonoBehaviour
     [HideInInspector] public Vector3 newLocation;
     [HideInInspector] public Vector3 movementDirection;
     [HideInInspector] public float moveDistance;
-    [HideInInspector] public bool moveCheck = false;
-    [HideInInspector] public float currentDistance;
-    public float maxVariance = 0.07f;
+    [HideInInspector] public float itemMoveTime = 0, itemStopTime;
+    public float damageRadius;
+    [HideInInspector] public bool itemExploded = false, itemExploded2;
     public float moveSpeed = 1;
     public int damage = 4;
     public float itemAliveTime = 0;
     public float itemDeleteTime = 10;
+
     void Update()
     {
+
         playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
         if (Input.GetMouseButtonDown(1))
         {
             Throw();
         }
-        if (currentDistance >= maxVariance)
+        if (itemMoveTime < itemStopTime && this.tag == "Itemthrown")
         {
-            this.transform.position += movementDirection * moveDistance * Time.deltaTime * moveSpeed;
-            currentDistance = Vector3.Distance(newLocation, this.transform.position);
+            this.transform.position += movementDirection * Time.deltaTime * moveSpeed;
+            itemMoveTime += Time.deltaTime;
         }
-        else if (this.tag == "Itemthrown")
+        else if (itemMoveTime >= itemStopTime && this.tag == "Itemthrown")
         {
             {
+                /*if (!itemExploded)
+                {
+                    ExplosionDamage(this.transform.position, damageRadius);
+                    itemExploded = true;
+                    itemExploded2 = true;
+                }*/
                 itemAliveTime += Time.deltaTime;
+                /*if (this.tag == "Itemthrown")
+                {
+                    ExplosionDamage(this.transform.position, damageRadius);
+                }*/
                 if (itemAliveTime >= itemDeleteTime)
                 {
                     Destroy(this.gameObject);
                     itemAliveTime = 0;
                 }
+
             }
         }
     }
@@ -50,17 +63,18 @@ public class ItemThrowVersion2 : MonoBehaviour
                 newLocation = Camera.main.ScreenToWorldPoint(screenPoint); //get target(mouse) location
                 movementDirection = Vector3.Normalize(newLocation - this.transform.position);
                 moveDistance = Vector3.Distance(newLocation, this.transform.position);
-                currentDistance = Vector3.Distance(newLocation, this.transform.position);
+                itemStopTime = moveDistance / moveSpeed;
                 this.tag = "Itemthrown";
             }
         }
     }
+}
     /*
         // deal damage
         ExplosionDamage(this.transform.position, 5.0f);
         Destroy(this.gameObject);
     */
-    void ExplosionDamage(Vector3 center, float radius)
+    /*void ExplosionDamage(Vector3 center, float radius)
     {
         Debug.Log("exploded");
         Collider[] hitColliders = Physics.OverlapSphere(center, radius);
@@ -71,4 +85,4 @@ public class ItemThrowVersion2 : MonoBehaviour
             i++;
         }
     }
-}
+}*/

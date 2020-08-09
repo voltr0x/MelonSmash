@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    public bool enemySpawner;
+    /* public bool enemySpawner; */
     public enemy_main spawnPrefab;
     public enemy_target initialMoveTarget;
-    public GameObject melon;
 
     public float minSpawnInterval = 3.0f;
     public float maxSpawnInterval = 6.0f;
 
-    private float spawnTime;
-    private float spawnInterval;
+    public float spawnTime;
+    public float spawnInterval;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +27,12 @@ public class SpawnEnemy : MonoBehaviour
     {
         if(Time.time - spawnTime >= spawnInterval) //Time to spawn again
         {
-            if(enemySpawner) SpawnEnemyPrefab();
-            else SpawnMelonPrefab();
+            /*if (enemySpawner) */
+            SpawnEnemyPrefab();
+            /* else if (this.transform.childCount == 0)
+            {
+                SpawnMelonPrefab();
+            } */
 
             spawnTime = Time.time; //Reset spawn time
             spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
@@ -41,11 +44,5 @@ public class SpawnEnemy : MonoBehaviour
         //Spawns enemy at the location of SpawnPoint game object
         Instantiate(spawnPrefab, transform.position, transform.rotation);
         spawnPrefab.where_to_go = initialMoveTarget;
-    }
-
-    void SpawnMelonPrefab()
-    {
-        //Spawns enemy at the location of SpawnPoint game object
-        Instantiate(melon, transform.position, transform.rotation);
     }
 }

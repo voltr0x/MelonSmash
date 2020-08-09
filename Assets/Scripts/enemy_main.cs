@@ -9,6 +9,9 @@ public class enemy_main : MonoBehaviour
     private Vector3        enemy_move_direction;
     private Vector3        enemy_attracted_pos;
     public  int            health = 10;
+    [HideInInspector] public GameObject scriptAObject;
+    ItemThrowVersion2 scriptA;
+    public float timeForDamage;
 
     
     public  const int      ENEMY_NORMAL     = 1;
@@ -38,8 +41,8 @@ public class enemy_main : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.N))      { state = ENEMY_NORMAL; }
         else if(Input.GetKeyDown(KeyCode.K)) { state = ENEMY_KICKED; }
-        else if(Input.GetKeyDown(KeyCode.S)) { being_stunned();}
-        else if(Input.GetKeyDown(KeyCode.A)) { state = ENEMY_ATTRACTED; }
+        else if(Input.GetKeyDown(KeyCode.J)) { being_stunned();}
+        else if(Input.GetKeyDown(KeyCode.L)) { state = ENEMY_ATTRACTED; }
         
         switch(state)
         {
@@ -82,11 +85,18 @@ public class enemy_main : MonoBehaviour
         }
         
         // if died or reached the end point, self-destruction
-        if(health <= 0 || where_to_go.tag == "objectDestroyer"){
+        if(health <= 0 || where_to_go.tag == "objectDestroyer")
+        {
             Destroy(this.gameObject);
+
+        }
+        else
+        {
+            enemy_move_direction     =   Vector3.Normalize( where_to_go.transform.position - this.transform.position );
+            // move toward that direction
+            this.transform.position +=  enemy_speed * enemy_move_direction * Time.deltaTime;
         }
     }
-
     // after x seconds, a effect_ended signal will be released
     // then enemy will back to normal
     IEnumerator wait_for_seconds(int seconds)
@@ -116,5 +126,20 @@ public class enemy_main : MonoBehaviour
     void take_damage(int damage) {
         health -= damage;
         Debug.Log("Uhhhhh " + health);
+    }
+
+    void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Itemthrown")
+        {
+            scriptAObject = collider.gameObject;
+            scriptA = scriptAObject.GetComponent<ItemThrowVersion2>();
+            scriptA.itemExploded2 = true;
+            if (scriptA.itemExploded2 == true && scriptA.itemAliveTime <= timeForDamage && scriptA.itemAliveTime > 0)
+            {
+                scriptA.itemExploded2 = false;
+                take_damage(scriptA.damage);
+            }
+        }
     }
 }
