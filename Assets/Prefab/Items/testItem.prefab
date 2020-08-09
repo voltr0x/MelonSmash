@@ -11,10 +11,15 @@ GameObject:
   - component: {fileID: 8823819440073275645}
   - component: {fileID: 6494153569718642641}
   - component: {fileID: 5249775197030568691}
+<<<<<<< HEAD
   - component: {fileID: -7808971738787255737}
   - component: {fileID: 8794564309173532450}
   - component: {fileID: 1660613985388620455}
   - component: {fileID: 2531441592572423882}
+=======
+  - component: {fileID: -7778313794828200700}
+  - component: {fileID: 5656264505057183455}
+>>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
   m_Layer: 0
   m_Name: testItem
   m_TagString: Item
@@ -102,7 +107,11 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.1
+<<<<<<< HEAD
 --- !u!114 &-7808971738787255737
+=======
+--- !u!114 &-7778313794828200700
+>>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,6 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5234487631351663235}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: fa4b13ebd1a65bd46bfd130f90a38a5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -142,6 +152,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &2531441592572423882
+=======
+  m_Script: {fileID: 11500000, guid: 7806c9cf177852c4dada40c6385ad3e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5656264505057183455
+>>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +166,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5234487631351663235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7409a85a8ae5cd94b8dfdae8dc22ef50, type: 3}
+  m_Script: {fileID: 11500000, guid: 891c1009005765947bc760153e1c9c14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   newLocation: {x: 0, y: 0, z: 0}
@@ -158,5 +174,13 @@ MonoBehaviour:
   moveDistance: 0
   moveCheck: 0
   currentDistance: 0
+<<<<<<< HEAD
   maxVariance: 0.7
   moveSpeed: 0
+=======
+  maxVariance: 0.07
+  moveSpeed: 2
+  damage: 4
+  itemAliveTime: 0
+  itemDeleteTime: 10
+>>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
