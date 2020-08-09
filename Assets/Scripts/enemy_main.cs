@@ -9,10 +9,9 @@ public class enemy_main : MonoBehaviour
     private Vector3        enemy_move_direction;
     private Vector3        enemy_attracted_pos;
     public  int            health = 10;
-<<<<<<< HEAD
     [HideInInspector] public GameObject scriptAObject;
     ItemThrowVersion2 scriptA;
-=======
+    public float timeForDamage;
 
     
     public  const int      ENEMY_NORMAL     = 1;
@@ -29,7 +28,6 @@ public class enemy_main : MonoBehaviour
     private bool           effect_started = false;
     private bool           effect_ended   = false;
 
->>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
     // Start is called before the first frame update
     void Start()
     {  
@@ -43,8 +41,8 @@ public class enemy_main : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.N))      { state = ENEMY_NORMAL; }
         else if(Input.GetKeyDown(KeyCode.K)) { state = ENEMY_KICKED; }
-        else if(Input.GetKeyDown(KeyCode.S)) { being_stunned();}
-        else if(Input.GetKeyDown(KeyCode.A)) { state = ENEMY_ATTRACTED; }
+        else if(Input.GetKeyDown(KeyCode.J)) { being_stunned();}
+        else if(Input.GetKeyDown(KeyCode.L)) { state = ENEMY_ATTRACTED; }
         
         switch(state)
         {
@@ -90,7 +88,7 @@ public class enemy_main : MonoBehaviour
         if(health <= 0 || where_to_go.tag == "objectDestroyer")
         {
             Destroy(this.gameObject);
-<<<<<<< HEAD
+
         }
         else
         {
@@ -99,13 +97,6 @@ public class enemy_main : MonoBehaviour
             this.transform.position +=  enemy_speed * enemy_move_direction * Time.deltaTime;
         }
     }
-
-    void take_damage(int damage)
-    {
-=======
-        }
-    }
-
     // after x seconds, a effect_ended signal will be released
     // then enemy will back to normal
     IEnumerator wait_for_seconds(int seconds)
@@ -133,22 +124,21 @@ public class enemy_main : MonoBehaviour
     }
     
     void take_damage(int damage) {
->>>>>>> b295b9409fd0136d8133519f9d1c18a6e43b1526
         health -= damage;
         Debug.Log("Uhhhhh " + health);
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.gameObject.tag == "Itemthrown")
         {
             scriptAObject = collider.gameObject;
             scriptA = scriptAObject.GetComponent<ItemThrowVersion2>();
             scriptA.itemExploded2 = true;
-            if (scriptA.itemExploded2 == true && scriptA.itemAliveTime <= 0.5)
+            if (scriptA.itemExploded2 == true && scriptA.itemAliveTime <= timeForDamage && scriptA.itemAliveTime > 0)
             {
-                take_damage(scriptA.damage);
                 scriptA.itemExploded2 = false;
+                take_damage(scriptA.damage);
             }
         }
     }

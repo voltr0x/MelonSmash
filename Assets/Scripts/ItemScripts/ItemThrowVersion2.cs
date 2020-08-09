@@ -24,12 +24,12 @@ public class ItemThrowVersion2 : MonoBehaviour
         {
             Throw();
         }
-        if (itemMoveTime <= itemStopTime && this.tag == "Itemthrown")
+        if (itemMoveTime < itemStopTime && this.tag == "Itemthrown")
         {
             this.transform.position += movementDirection * Time.deltaTime * moveSpeed;
             itemMoveTime += Time.deltaTime;
         }
-        else if (itemMoveTime > itemStopTime)
+        else if (itemMoveTime >= itemStopTime && this.tag == "Itemthrown")
         {
             {
                 /*if (!itemExploded)
