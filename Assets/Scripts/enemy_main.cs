@@ -21,6 +21,7 @@ public class enemy_main : MonoBehaviour
 
     private int            stunned_effect_second   = 3;
     private int            attracted_effect_second = 3;
+    [HideInInspector] public int             kicked_effect_second    = 3;
 
     private int            state;
     private float          stunned_range = 0.3f;
@@ -60,6 +61,9 @@ public class enemy_main : MonoBehaviour
                  * note that if an enemy is in "kicked" state
                  * it can never be in another state (ie. cannot be stunned when flying)
                  */
+                // enemy_speed ^ 2 means flying faster than walking, also represent the
+                // enemies' weight (walk slower -> heavier -> fly slower)
+                this.transform.position += enemy_speed * enemy_speed * enemy_move_direction * Time.deltaTime;
                 break;
             case ENEMY_STUNNED:
                 this.transform.position = this.transform.position + (stunned_range * new Vector3(1, 0, 0));
@@ -90,12 +94,6 @@ public class enemy_main : MonoBehaviour
             Destroy(this.gameObject);
 
         }
-        else
-        {
-            enemy_move_direction     =   Vector3.Normalize( where_to_go.transform.position - this.transform.position );
-            // move toward that direction
-            this.transform.position +=  enemy_speed * enemy_move_direction * Time.deltaTime;
-        }
     }
     // after x seconds, a effect_ended signal will be released
     // then enemy will back to normal
@@ -105,6 +103,14 @@ public class enemy_main : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         // then set the flag
         effect_ended = true;
+    }
+
+    IEnumerator kicked_for_seconds(int seconds)
+    {
+        //yield on a new YieldInstruction that waits for x seconds.
+        yield return new WaitForSeconds(seconds);
+        // then self destruction
+        Destroy(this.gameObject);
     }
 
     void being_attracted(Vector3 melon_pos) {
@@ -118,9 +124,10 @@ public class enemy_main : MonoBehaviour
         StartCoroutine(wait_for_seconds(stunned_effect_second));
     }
     // get kicked direction from character script
-    void being_kicked(Vector3 kicked_direction) {
+    public void being_kicked(Vector3 kicked_direction) {
         state = ENEMY_KICKED;
         enemy_move_direction = Vector3.Normalize(kicked_direction);
+        StartCoroutine(kicked_for_seconds(kicked_effect_second));
     }
     
     void take_damage(int damage) {
