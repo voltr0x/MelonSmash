@@ -83,9 +83,8 @@ public class GameManager : MonoBehaviour
         //mainTimerDisplay.text = "LEVEL COMPLETE";
     }
 
-    public void RestartGame()
+    public void RestartLevel()
     {
-        //Restart level
         SceneManager.LoadScene(playAgainLevelToLoad);
     }
 
@@ -93,5 +92,10 @@ public class GameManager : MonoBehaviour
     {
         //Load next scene
         SceneManager.LoadScene(nextLevelToLoad);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }

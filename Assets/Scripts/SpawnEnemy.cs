@@ -77,7 +77,7 @@ public class SpawnEnemy : MonoBehaviour
     void SpawnEnemyPrefab()
     {
         //Spawns enemy at the location of SpawnPoint game object
-        Instantiate(spawnPrefab, transform.position, transform.rotation);
+        enemy_main spawnedEnemy = Instantiate(spawnPrefab, transform.position, transform.rotation);
 
        //Determine the spawn location of enemy
         /*float distance = Vector3.Distance(spawnPrefab.transform.position, target1.transform.position);
@@ -90,6 +90,6 @@ public class SpawnEnemy : MonoBehaviour
             spawnPrefab.where_to_go =  target2;
         }*/
 
-        spawnPrefab.where_to_go = initialMoveTarget;
+        spawnedEnemy.where_to_go = initialMoveTarget;
     }
 }
