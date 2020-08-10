@@ -9,6 +9,8 @@ TagManager:
   - Itemthrown
   - objectDestroyer
   - Enemy
+  - Target1
+  - Target2
   layers:
   - Default
   - TransparentFX

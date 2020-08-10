@@ -30,4 +30,8 @@ public class enemy_target : MonoBehaviour
     	}
     	return next_target;
     }
+    public enemy_target get_next_target()
+    {
+        return next_target;
+    }
 }
