@@ -12,16 +12,27 @@ public class enemy_main : MonoBehaviour
     [HideInInspector] public GameObject scriptAObject;
     ItemThrowVersion2 scriptA;
     public float timeForDamage;
-
     
     public  const int      ENEMY_NORMAL     = 1;
     public  const int      ENEMY_KICKED     = 2;
     public  const int      ENEMY_STUNNED    = 3;
     public  const int      ENEMY_ATTRACTED  = 4;
+    public  const int      ENEMY_DIED       = 5;
 
     private int            stunned_effect_second   = 3;
     private int            attracted_effect_second = 3;
     [HideInInspector] public int             kicked_effect_second    = 3;
+
+    /*For animations*/
+    public  SpriteRenderer sprite_renderer;
+    public  Sprite         old_sprite;
+    public  Sprite         new_sprite;
+    private float          sprite_change_interval;
+    private int            sprite_change_counter = 0;
+    private bool           sprite_switcher = true;
+    private bool           moving_right = false;
+    private bool           facing_right = false;
+    private float          rotate_angle = 10;
 
     private int            state;
     private float          stunned_range = 0.3f;
@@ -29,22 +40,25 @@ public class enemy_main : MonoBehaviour
     private bool           effect_started = false;
     private bool           effect_ended   = false;
 
+    //For changing the size of the enemy
+    private float enemyScale = 0.08f;
+
     // Start is called before the first frame update
     void Start()
     {  
         state = ENEMY_NORMAL;
+        sprite_change_interval = enemy_speed * 20;
     }
 
     // Update is called once per frame
     void Update()
     {
         // for test only
-        
         if(Input.GetKeyDown(KeyCode.N))      { state = ENEMY_NORMAL; }
         else if(Input.GetKeyDown(KeyCode.K)) { state = ENEMY_KICKED; }
         else if(Input.GetKeyDown(KeyCode.J)) { being_stunned();}
         else if(Input.GetKeyDown(KeyCode.L)) { state = ENEMY_ATTRACTED; }
-        
+
         switch(state)
         {
             case ENEMY_NORMAL:
@@ -64,6 +78,8 @@ public class enemy_main : MonoBehaviour
                 // enemy_speed ^ 2 means flying faster than walking, also represent the
                 // enemies' weight (walk slower -> heavier -> fly slower)
                 this.transform.position += enemy_speed * enemy_speed * enemy_move_direction * Time.deltaTime;
+                this.transform.rotation = Quaternion.Euler(0, 0, this.transform.rotation.z + rotate_angle);
+                rotate_angle += 10;
                 break;
             case ENEMY_STUNNED:
                 this.transform.position = this.transform.position + (stunned_range * new Vector3(1, 0, 0));
@@ -78,23 +94,67 @@ public class enemy_main : MonoBehaviour
             default:
                 state = ENEMY_NORMAL;
                 break;
-
-            
         }
-        // if effect ended, back to normal
-        if(effect_ended) {
-            effect_ended   = false;
-            state          = ENEMY_NORMAL;
-            Debug.Log("back to normal");
+
+        if(state != ENEMY_DIED){
+            /***************************** Moving Animation *****************************/
+            // change sprite for animation
+            sprite_change_counter++;
+            if(sprite_change_counter >= sprite_change_interval) 
+            {
+                if(sprite_switcher) sprite_renderer.sprite = new_sprite;
+                else sprite_renderer.sprite = old_sprite;
+                // reset counter
+                sprite_switcher = !sprite_switcher;
+                sprite_change_counter = 0;
+            }
+            // detrmine moving direction
+            if(enemy_move_direction.x > 0) {
+                moving_right = true;
+            } else moving_right = false;
+
+            // determine if flip is needed
+            // if moving right but not facing right, flip sprite
+            if(moving_right && !facing_right) {
+                this.transform.localScale = new Vector3(-enemyScale, enemyScale, 1);
+                facing_right = true; // now it is facing right
+            }
+            // if moving left but facing right, flip
+            else if(!moving_right && facing_right) {
+                this.transform.localScale = new Vector3(enemyScale, enemyScale, 1);
+                facing_right = false;
+            }
+
+
+            // if effect ended, back to normal
+            if(effect_ended) {
+                effect_ended   = false;
+                state          = ENEMY_NORMAL;
+                Debug.Log("back to normal");
+            }
+            
+            // if died or reached the end point, self-destruction
+            if(health <= 0)
+            {
+                state = ENEMY_DIED;
+                if(facing_right) this.transform.localScale = new Vector3(-enemyScale, -enemyScale, 1);
+                else this.transform.localScale = new Vector3(enemyScale, -enemyScale, 1);
+                StartCoroutine(die_animation(2));
+            }
+
+            if(where_to_go.tag == "objectDestroyer") Destroy(this.gameObject);
         }
         
-        // if died or reached the end point, self-destruction
-        if(health <= 0 || where_to_go.tag == "objectDestroyer")
-        {
-            Destroy(this.gameObject);
-
-        }
     }
+
+    
+    IEnumerator die_animation(int seconds)
+    {
+        //yield on a new YieldInstruction that waits for x seconds.
+        yield return new WaitForSeconds(seconds);
+        Destroy(this.gameObject);
+    }
+
     // after x seconds, a effect_ended signal will be released
     // then enemy will back to normal
     IEnumerator wait_for_seconds(int seconds)
@@ -105,6 +165,8 @@ public class enemy_main : MonoBehaviour
         effect_ended = true;
     }
 
+    // after being kicked for x seconds (estimated time for enemy fly out
+    // of the screen), destroy the object
     IEnumerator kicked_for_seconds(int seconds)
     {
         //yield on a new YieldInstruction that waits for x seconds.

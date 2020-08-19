@@ -764,4 +764,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/TitleScene.unity
   - Assets/Scenes/Level 1.unity
-  playerPath: D:/Playtest/Melon Smash.exe
+  playerPath: D:/Playtest2/Melon Smash.exe

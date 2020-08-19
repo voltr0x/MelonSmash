@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
     public static GameManager gm;
 
     public bool gameOver = false;
+    public bool beatLevel = false;
     
     public GameObject playAgainButton;
     public GameObject exitButton;
 
     public Text gameOverText;
+    public Text beatLevelText;
     public Text pumpkinLives;
     
     public string playAgainLevelToLoad;
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
 
         // Inactivate the buttons and texts, if set
         gameOverText.gameObject.SetActive(false);
+        beatLevelText.gameObject.SetActive(false);
 
         if (playAgainButton)
             playAgainButton.SetActive(false);
@@ -49,6 +52,11 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
+
+        /*if (beatLevel)
+        {
+            BeatLevel();
+        }*/
     }
 
     public void PumpkinEaten(int timesEaten)
@@ -79,6 +87,15 @@ public class GameManager : MonoBehaviour
     {
         gameOver = true;
 
+        //Activate level complete text
+        beatLevelText.gameObject.SetActive(true);
+
+        // Activate the buttons
+        if (playAgainButton)
+            playAgainButton.SetActive(true);
+
+        if (exitButton)
+            exitButton.SetActive(true);
         // repurpose the timer to display a message to the player
         //mainTimerDisplay.text = "LEVEL COMPLETE";
     }

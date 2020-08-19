@@ -165,3 +165,5 @@ MonoBehaviour:
     type: 3}
   newLocation: {x: 0, y: 0, z: 0}
   kickedDirection: {x: 0, y: 0, z: 0}
+  kickCooldown: 0
+  cooldownTimer: 2
