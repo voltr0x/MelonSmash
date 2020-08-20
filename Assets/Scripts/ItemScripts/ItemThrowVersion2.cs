@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemThrowVersion2 : MonoBehaviour
 {
-    Transform playerLocation;
+    GameObject playerLocation;
     [HideInInspector] public Vector3 newLocation;
     [HideInInspector] public Vector3 movementDirection;
     [HideInInspector] public float moveDistance;
@@ -15,18 +15,20 @@ public class ItemThrowVersion2 : MonoBehaviour
     public int damage = 4;
     public float itemAliveTime = 0;
     public float itemDeleteTime = 10;
+    public Sprite explodedMelonImage;
+    [HideInInspector] SpriteRenderer spriteRenderer;
 
     void Update()
     {
-
-        playerLocation = GameObject.FindGameObjectWithTag("Player").transform;
-        if (Input.GetMouseButtonDown(1))
+        playerLocation = GameObject.FindGameObjectWithTag("Player");
+        if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Space))
         {
             Throw();
         }
         if (itemMoveTime < itemStopTime && this.tag == "Itemthrown")
         {
             this.transform.position += movementDirection * Time.deltaTime * moveSpeed;
+            this.transform.Rotate(0, 0, 10);
             itemMoveTime += Time.deltaTime;
         }
         else if (itemMoveTime >= itemStopTime && this.tag == "Itemthrown")
@@ -39,6 +41,7 @@ public class ItemThrowVersion2 : MonoBehaviour
                     itemExploded2 = true;
                 }*/
                 itemAliveTime += Time.deltaTime;
+                changeSprite(explodedMelonImage);
                 /*if (this.tag == "Itemthrown")
                 {
                     ExplosionDamage(this.transform.position, damageRadius);
@@ -52,9 +55,10 @@ public class ItemThrowVersion2 : MonoBehaviour
             }
         }
     }
+
     void Throw()
     {
-        if (playerLocation.childCount == 1 && playerLocation.GetChild(0) == this.transform && this.tag == "Item_pickedup")
+        if (playerLocation.transform.childCount == 1 && playerLocation.transform.GetChild(0) == this.transform && this.tag == "Item_pickedup")
         {
             {
                 this.transform.SetParent(null);
@@ -67,6 +71,12 @@ public class ItemThrowVersion2 : MonoBehaviour
                 this.tag = "Itemthrown";
             }
         }
+    }
+
+    public void changeSprite(Sprite newSprite)
+    {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = newSprite;
     }
 }
     /*
