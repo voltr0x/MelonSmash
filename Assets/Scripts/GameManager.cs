@@ -52,18 +52,22 @@ public class GameManager : MonoBehaviour
         {
             EndGame();
         }
-
-        /*if (beatLevel)
-        {
-            BeatLevel();
-        }*/
     }
 
     public void PumpkinEaten(int timesEaten)
     {
         eatenTimes += timesEaten;
         pumpkinHealth -= timesEaten;
-        pumpkinLives.text = pumpkinHealth.ToString();
+
+        if(pumpkinHealth >= 0)
+        {
+            pumpkinLives.text = pumpkinHealth.ToString();
+        }
+        else
+        {
+            //Prevents displaying negative value
+            pumpkinLives.text = "0";
+        }   
     }
 
     void EndGame()
@@ -83,7 +87,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!");
     }
 
-    void BeatLevel()
+    public void BeatLevel()
     {
         gameOver = true;
 

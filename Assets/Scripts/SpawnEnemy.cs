@@ -40,10 +40,6 @@ public class SpawnEnemy : MonoBehaviour
     {
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
-        //It will start spawning at the very begining, can add a delay later
-        //spawnTime = Time.time;
-        //spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-
         //Can have a random number generated
         waveCoolDown = timeBetweenWaves;
     }
@@ -51,7 +47,21 @@ public class SpawnEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!gameManager.gameOver)
+        //Check if wave is cleared
+        if (state == SpawnState.WAITING)
+        {
+            if (!EnemyAlive())
+            {
+                Debug.Log("Enemies dead");
+                WaveCompleted();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        if (!gameManager.gameOver)
         {
             Debug.Log("Wave begins");
             if(waveCoolDown <= 0)
@@ -68,20 +78,6 @@ public class SpawnEnemy : MonoBehaviour
                 waveCoolDown -= Time.deltaTime;
             }
         }
-
-        //Check if wave is cleared
-        if (state == SpawnState.WAITING)
-        {
-            if (!EnemyAlive())
-            {
-                Debug.Log("Enemies dead");
-                WaveCompleted();
-            }
-            else
-            {
-                return;
-            }
-        }
     }
 
     void WaveCompleted()
@@ -94,7 +90,7 @@ public class SpawnEnemy : MonoBehaviour
         {
             //Level is completed
             Debug.Log("Level complete!");
-            gameManager.beatLevel = true;
+            gameManager.BeatLevel();
         }
         else
         {

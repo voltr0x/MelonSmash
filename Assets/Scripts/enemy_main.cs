@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,27 +27,33 @@ public class enemy_main : MonoBehaviour
     public  SpriteRenderer sprite_renderer;
     public  Sprite         old_sprite;
     public  Sprite         new_sprite;
+    public  Sprite         dead_sprite;
     private float          sprite_change_interval;
     private int            sprite_change_counter = 0;
     private bool           sprite_switcher = true;
     private bool           moving_right = false;
     private bool           facing_right = false;
     private float          rotate_angle = 10;
+    
+    //Size of the enemy
+    private float enemyScale = 0.08f;
 
+    /*For special effects*/
     private int            state;
     private float          stunned_range = 0.3f;
-
     private bool           effect_started = false;
     private bool           effect_ended   = false;
 
-    //For changing the size of the enemy
-    private float enemyScale = 0.08f;
-
+    /*For sound effect*/
+    public AudioSource enemy_sound;
+    public AudioClip eating_sound;
+    private bool       sound_played = false;
     // Start is called before the first frame update
     void Start()
     {  
         state = ENEMY_NORMAL;
         sprite_change_interval = enemy_speed * 20;
+        enemy_sound.clip = eating_sound;
     }
 
     // Update is called once per frame
@@ -108,6 +114,7 @@ public class enemy_main : MonoBehaviour
                 sprite_switcher = !sprite_switcher;
                 sprite_change_counter = 0;
             }
+
             // detrmine moving direction
             if(enemy_move_direction.x > 0) {
                 moving_right = true;
@@ -137,16 +144,27 @@ public class enemy_main : MonoBehaviour
             if(health <= 0)
             {
                 state = ENEMY_DIED;
-                if(facing_right) this.transform.localScale = new Vector3(-enemyScale, -enemyScale, 1);
-                else this.transform.localScale = new Vector3(enemyScale, -enemyScale, 1);
-                StartCoroutine(die_animation(2));
+                sprite_renderer.sprite = dead_sprite;
+                if(facing_right) this.transform.localScale = new Vector3(-enemyScale, enemyScale, 1);
+                else this.transform.localScale = new Vector3(enemyScale, enemyScale, 1);
+                StartCoroutine(die_animation(1));
             }
 
-            if(where_to_go.tag == "objectDestroyer") Destroy(this.gameObject);
+            if(where_to_go.tag == "objectDestroyer") 
+            {
+                if(!sound_played) StartCoroutine(die_sound(2));
+                sound_played = true;
+            }
         }
-        
     }
 
+    IEnumerator die_sound(int seconds)
+    {
+        enemy_sound.Play();
+        //yield on a new YieldInstruction that waits for x seconds.
+        yield return new WaitForSeconds(seconds);
+        Destroy(this.gameObject);
+    }
     
     IEnumerator die_animation(int seconds)
     {
